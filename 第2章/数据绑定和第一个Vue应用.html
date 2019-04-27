@@ -10,15 +10,24 @@
             <input type="text" v-model="name" placeholder="你的名字">
             <h1>你好, {{name}}</h1>
         </div>
+        <div id="app2">
+            <h1>{{mydata}}</h1>
+        </div>
         <script>
             var mydata = {
                 a: 1
             }
             var app = new Vue({
                 el: '#app1',
+                //el用于指定一个页面中已经存在的DOM元素来挂载Vue实例，HTMLElement或CSS选择器
                 data: {
                     name: ''
                 }
+            })
+            var app2 = new Vue({
+                el: '#app2',
+                data: mydata
+                //指向一个已有变量 mydata.a=3（修改原数据） app2.a=5（修改属性）
             })
         </script>
     </body>
