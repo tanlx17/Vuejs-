@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <select v-model="selected">
+            <option>html</option>
+            <option>JavaScript</option>
+            <option>css</option>
+        </select>
+        <p>选择的项： {{ selected }}</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                selected: 'html'
+            }
+        })
+    </script>
+</body>
+
+</html>

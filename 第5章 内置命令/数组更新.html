@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <template v-for="book in books">
+                <li>书名: {{ book.name }}</li>
+                <li>作者: {{ book.author }}</li>
+            </template>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                books: [
+                {
+                    name: '《Vue.js实战》',
+                    author: 'Tan'
+                },
+                {
+                    name: '《JavaScript语言精粹》',
+                    author: 'Liu'
+                },
+                {
+                    name: '《JavaScript高级程序设计》',
+                    author: 'KD'
+                }
+                ]
+            }
+        });
+
+        app.books = app.books.filter(function(item){
+            return item.name.match(/JavaScript/);
+        });
+
+        
+    </script>
+</body>
+
+</html>
