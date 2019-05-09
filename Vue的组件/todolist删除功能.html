@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>index</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="root">
+            <div>
+                {{ msg }}
+                <input v-model="inputValue"/>
+                <button @click="handleSubmit">提交</button>
+            </div>
+            <ul>
+                <todo-item 
+                    v-for="item of list" 
+                    :key="index" 
+                    :content="item"
+                    :index="index" 
+                    @delete="handleDelete" 
+                    >
+                </todo-item>
+            </ul>
+        </div>
+        <script>
+            Vue.component("todo-item", {
+                data: function(){
+                    return{
+                        msg: "tan"
+                    }
+                },
+                props: ["content","index"], //调用父组件的index下标
+                template: "<li @click='handleClick'>{{ content }}</li>",
+                methods: {
+                    handleClick: function(){
+                        this.$emit('delete', this.index)
+                    }
+                    //当子组件被点击时,需要通知父组件把数据删除。
+                    //delete是自定义事件，传递的值是index，通过this.index获取
+                }
+            })
+
+            new Vue({
+                el: '#root',
+                data: {
+                    inputValue: "Hello",
+                    list: [],
+                },
+                methods: {
+                    handleSubmit: function(){
+                        this.list.push(this.inputValue)
+                        this.inputValue = ''
+                    },
+                    handleDelete: function(index){
+                        this.list.splice(index,1)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

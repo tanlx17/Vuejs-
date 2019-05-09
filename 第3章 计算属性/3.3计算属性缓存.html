@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+    计算属性基于依赖缓存，当需要缓存时，采用计算属性computed实现
+    methods也能实现相同的效果，甚至可以传递参数。只要重新渲染，它就会被调用，因此函数也会被执行
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>index</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{ reversedText() }}
+            <!--{{ text.split(',').reverse().join(',') }}-->
+        </div>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    text: '123,456'
+                },
+                methods: {
+                    reversedText: function(){
+                        // 这里的this指向的是当前的Vue实例
+                        return this.text.split(',').reverse().join(',')
+                    }
+                },
+            })
+        </script>
+    </body>
+</html>
