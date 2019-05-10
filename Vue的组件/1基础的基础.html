@@ -9,15 +9,14 @@
 
 <body>
     <div id="app">
-        <input type="radio" :checked="picked">
-        <label>单选按钮</label>
+        <today-weather></today-weather>
     </div>
     <script>
+        Vue.component('today-weather',{
+            template: '<div>今天下雨，出不去啦，干什么呢？看Youtube吧!</div>'
+        })
         var app = new Vue({
             el: '#app',
-            data: {
-                picked: true
-            }
         })
     </script>
 </body>

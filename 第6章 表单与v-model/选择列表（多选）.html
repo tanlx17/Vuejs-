@@ -9,14 +9,18 @@
 
 <body>
     <div id="app">
-        <input type="radio" :checked="picked">
-        <label>单选按钮</label>
+        <select v-model="selected" multiple>
+            <option>html</option>
+            <option>JavaScript</option>
+            <option>css</option>
+        </select>
+        <p>选择的项： {{ selected }}</p>
     </div>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                picked: true
+                selected: ['html','css']
             }
         })
     </script>

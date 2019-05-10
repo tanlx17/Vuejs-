@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>您的成绩评价</h1>
+        <test-result :score="50"></test-result>
+        <test-result :score="78"></test-result>
+        <test-result :score="98"></test-result>
+        <test-result :score="100"></test-result>
+    </div>
+    <script>
+        Vue.component('test-result', {
+            props: ['score'],
+            template: '<div><strong>{{score}}分, {{testResult}}</strong></div>',
+            computed: {
+                testResult: function() {
+                    var strResult = '';
+                    if(this.score < 60)
+                        strResult = "不及格";
+                    else if(this.score < 90)
+                        strResult = "中等生";
+                    else if(this.score <= 100)
+                        strResult = "优秀生";
+                    return strResult;
+                }
+            }
+        });
+        var app = new Vue({
+            el: '#app',
+            data: {}
+        });
+    </script>
+</body>
+
+</html>
