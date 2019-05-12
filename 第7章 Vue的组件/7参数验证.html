@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<!--
+    props:组件参数验证语法
+    为组件中接受到的变量进行逻辑验证
+-->
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>身世之谜</h1>
+        <show-member-info name="tanlx" :age="23" :detail="{address:'China', language:'Putonghua'}" ></show-member-info>
+    </div>
+    <script>
+        Vue.component('show-member-info',{
+            props: {
+                name: {
+                    type: String,
+                    required: true,
+                },
+                age: {
+                    type: Number,
+                    validator: function (value) {
+                        return value >= 0 && value <= 130;
+                    }
+                },
+                detail: {
+                    type: Object,
+                    default: function() {
+                        return {
+                            address: 'US',
+                            language: 'English',
+                        };
+                    }
+                },
+            },
+            template: '<div>姓名: {{this.name}}<br/>'
+                + '年龄: {{this.age}}岁<br/>'
+                + '地址: {{this.detail.address}}<br/>'
+                + '语言: {{this.detail.language}} </div>'
+            
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {}
+        })
+    </script>
+</body>
+
+</html>

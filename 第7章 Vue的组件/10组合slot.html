@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<!--
+    通过参数接收内容 通过slot接收内容
+    在子组件中通过为多个slot进行命名,来接受父组件的不同内容的数据。
+-->
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <nba-all-stars c="奥尼尔" pf="加内特">
+            <span slot="sf">皮尔斯</span>
+            <span slot="sg">雷阿伦</span>
+            <span slot="pg">隆多</span>
+        </nba-all-stars>
+    </div>
+    <script>
+        Vue.component('nba-all-stars', {
+            props: ['c', 'pf'],
+            template: '<div>'
+                +'<div>中锋: {{c}}</div>'
+                +'<div>大前: {{pf}}</div>'
+                +'<div>小前: <slot name="sf"></slot></div>'
+                +'<div>分卫: <slot name="sg"></slot></div>'
+                +'<div>控卫: <slot name="pg"></slot></div>'
+                +'</div>'
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {}
+        })
+    </script>
+</body>
+
+</html>
