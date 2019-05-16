@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>index</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>总数: {{total}}</p>
+            <!--父组件在子组件的自定义标签上使用 v-on（@） 来监听子组件触发的自定义事件；
+                也可以监听DOM事件，这时可以用.native修饰符表示监听的是一个原生事件；
+                子组件用$emit()来触发事件，父组件用$on()来监听子组件的事件
+            -->
+            <my-component
+                @increase="handleGetTotal"
+                @reduce="handleGetTotal"
+            ></my-component>
+            <my-component
+                @increase="handleGetTotal"
+                @reduce="handleGetTotal"
+            ></my-component>
+            
+        </div>
+        <script>
+            Vue.component('my-component',{
+                template: '<div>\
+                <button @click="handleIncrease">+1</button>\
+                <button @click="handleReduce">-1</button>\
+            </div>',
+            data: function () {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                handleIncrease: function () {
+                    this.counter++;
+                    this.$emit('increase', this.counter);
+                },
+                handleReduce: function () {
+                    if(this.counter >= 1){
+                        this.counter--;
+                        this.$emit('reduce', this.counter)
+                    }
+                }
+            },
+            })
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    total: 0
+                },
+                methods: {
+                    handleGetTotal: function(total) {
+                        this.total = total
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
